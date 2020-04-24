@@ -3,15 +3,14 @@ package modelo;
 import java.util.HashMap;
 
 public class Matriz<K, E> {
-	//vamos a hacer una matriz bidireccional
-	private int ancho, alto;
+	// vamos a hacer una matriz bidireccional
+	private Medidas medidasMatriz;
 	HashMap<K, E> elements = new HashMap<K, E>();
-	HashMap<E,K> reverse = new HashMap<E,K>();
+	HashMap<E, K> reverse = new HashMap<E, K>();
 
-	public Matriz(int ancho, int alto) {
+	public Matriz(Medidas medidaMatriz) {
 		super();
-		this.ancho = ancho;
-		this.alto = alto;
+		this.medidasMatriz = medidaMatriz;
 	}
 
 	public E insertElement(K coordinate, E element) {
@@ -23,7 +22,7 @@ public class Matriz<K, E> {
 	public E getElement(K coord) {
 		return elements.get(coord);
 	}
-	
+
 	public K getClave(E element) {
 		return reverse.get(element);
 	}

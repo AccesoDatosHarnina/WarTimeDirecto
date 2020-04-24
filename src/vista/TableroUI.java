@@ -17,7 +17,7 @@ public class TableroUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public TableroUI(int ancho, int alto, MouseAdapter mouseAdapter,TableroUIInfo tableroUIInfo) {
+	public TableroUI(int ancho, int alto, MouseAdapter mouseAdapter, TableroUIInfo tableroUIInfo) {
 		super();
 		this.mouseAdapter = mouseAdapter;
 		fichas = new JPanel[ancho][alto];
@@ -32,6 +32,7 @@ public class TableroUI extends JPanel {
 		for (int i = 0; i < fichas.length; i++) {
 			for (int j = 0; j < fichas[i].length; j++) {
 				JPanel casilla = fichas[i][j];
+				casilla.setName(String.valueOf(i) + ":" + String.valueOf(j));
 				casilla.addMouseListener(mouseAdapter);
 				add(casilla);
 			}
