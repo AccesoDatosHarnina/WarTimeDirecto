@@ -66,4 +66,8 @@ public class Ejercito {
 	public Batallon getBatallonActual() {
 		return group.get(idBatallonActual);
 	}
+
+	public LinkedList<Batallon> getGroup() {
+		return group;
+	}
 }

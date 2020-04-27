@@ -29,7 +29,9 @@ public class TableroUIPrueba extends JFrame {
 	private TableroUIInfo tableroUIInfo;
 	private ArrayList<Batallon> batallones = new ArrayList<Batallon>();
 
-	private Juego prueba = new Juego();
+	private pruebaRellenarEjercitos pruebaBatallones = new pruebaRellenarEjercitos();
+
+	private Juego prueba = new Juego(pruebaBatallones.getGroup(), pruebaBatallones.getGroup1());
 
 	/**
 	 * Launch the application.
@@ -64,9 +66,12 @@ public class TableroUIPrueba extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				JPanel panel = (JPanel) e.getSource();
-				Coordenada coordenada = obtenerCoordenada(panel.getName());
-				getTablero().insertar(getListaDeBatallones().pop(), coordenada);
-				;
+				if (!getListaDeBatallones().isEmpty()) {
+
+					Coordenada coordenada = obtenerCoordenada(panel.getName());
+					getTablero().insertar(getListaDeBatallones().pop(), coordenada);
+
+				}
 				tableroUI.actualizarTablero(tableroUIInfo);
 			}
 
