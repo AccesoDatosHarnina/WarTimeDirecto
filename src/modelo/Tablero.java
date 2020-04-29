@@ -17,11 +17,32 @@ public class Tablero {
 		return casillas.getElement(coordenada);
 	}
 
-	public void insertar(Batallon batallon, Coordenada coordenada) {
-		casillas.insertElement(coordenada, batallon);
+	public boolean insertar(Casilla casilla, Coordenada coordenada) {
+		boolean response = false;
+		if (!casillas.contieneElemento(casilla) && !casillas.contieneClave(coordenada)) {
+			casillas.insertElement(coordenada, casilla);
+			response = true;
+		}
+		return response;
 	}
 
-	public void insertar(Casilla casilla, Coordenada coordenada) {
-		casillas.insertElement(coordenada, casilla);
+	public int getMedidasTableroAlto() {
+		return medidasTablero.getAlto();
+	}
+
+	public int getMedidasTableroAncho() {
+		return medidasTablero.getAncho();
+	}
+
+	private boolean validarCoordenada(int idEjercitoActual, Coordenada coordenada) {
+		byte maxY = 5, minY = 0;
+		if (idEjercitoActual > 0) {
+			maxY = 11;
+			minY = 6;
+		}
+		if (coordenada.getY() >= minY || coordenada.getY() <= maxY) {
+			return true;
+		}
+		return false;
 	}
 }

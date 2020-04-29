@@ -31,7 +31,7 @@ public class EspecialidadSoldado extends JPanel{
 		this.focusAdapter=focusAdapter;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel = new JLabel("Especialidad     :");
+		JLabel lblNewLabel = new JLabel("Especialidad     :   ");
 		add(lblNewLabel);
 		
 		lblEspecialidad = new JLabel(especialidad.toString());

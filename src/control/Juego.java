@@ -1,55 +1,86 @@
 package control;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Stack;
 
 import modelo.Batallon;
+import modelo.Coordenada;
 import modelo.Ejercito;
-import modelo.Especialidad;
 import modelo.Medidas;
-import modelo.Soldado;
 import modelo.Tablero;
-import modelo.Tipo;
 
 public class Juego {
 
-	private Ejercito ejercitoA;
-	private Ejercito ejercitoB;
+	private LinkedList<Ejercito> ejercitos = new LinkedList<Ejercito>();
 	private Tablero tablero;
-	private Stack<Batallon> batallonesColocacion = new Stack<Batallon>();
 	private final Medidas medidasTablero = new Medidas(6, 12);
+	private int idEjercitoActual = 0;
+	private boolean localizarEstado = true;
 
-	public Juego(LinkedList<Batallon> batallonesEjercitoA, LinkedList<Batallon> BatallonesEjercitoB) {
+	public Juego() {
 		super();
-		rellenarEjercitos(batallonesEjercitoA, BatallonesEjercitoB);
-		llenarBatallonesAcolocar();
 		this.tablero = new Tablero(this.medidasTablero);
+		ejercitos.add(new Ejercito(0));
+		ejercitos.add(new Ejercito(1));
+		agregarColorBatallones(ejercitos.get(0), Color.green);
+		agregarColorBatallones(ejercitos.get(1), Color.yellow);
 	}
 
-	private void rellenarEjercitos(LinkedList<Batallon> batallonesEjercitoA, LinkedList<Batallon> BatallonesEjercitoB) {
-		this.ejercitoA = new Ejercito(0, batallonesEjercitoA);
-		this.ejercitoB = new Ejercito(1, BatallonesEjercitoB);
-	}
+	public boolean localizarBatallones(Coordenada coordenada) {
+		boolean insertar = localizarEstado;
+		if (insertar) {
+			Ejercito ejercito = ejercitos.get(idEjercitoActual);
+			if (insertar = validarCoordenada(idEjercitoActual, coordenada)) {
 
-	public Stack<Batallon> getBatallonesColocacion() {
-		return batallonesColocacion;
-	}
-
-	private void llenarBatallonesAcolocar() {
-		for (Batallon batallon : ejercitoA.getGroup()) {
-			batallonesColocacion.push(batallon);
+				Batallon batallonActual = ejercitos.get(idEjercitoActual).getBatallonActual();
+				insertar = tablero.insertar(batallonActual, coordenada);
+				if (insertar) {
+					if (!ejercito.setSguienteBatallon()) {
+						setSiguienteEjercito();
+					}
+				}
+			}
 		}
-		for (Batallon batallon2 : ejercitoB.getGroup()) {
-			batallonesColocacion.push(batallon2);
-		}
+		return insertar;
+	}
 
+	private boolean validarCoordenada(int idEjercitoActual, Coordenada coordenada) {
+		int maxY = 5, minY = 0;
+		if (idEjercitoActual == 1) {
+			maxY = 11;
+			minY = 6;
+		}
+		return (coordenada.getY() >= minY && coordenada.getY() <= maxY);
+	}
+
+	public int getIdEjercitoActual() {
+		return idEjercitoActual;
+	}
+
+	public void agregarColorBatallones(Ejercito ejercito, Color color) {
+		ejercito.cambiaColorBatallones(color);
+	}
+
+	private void setSiguienteEjercito() {
+		if (++idEjercitoActual == ejercitos.size()) {
+			idEjercitoActual = 0;
+			localizarEstado = false;
+		}
+	}
+
+	public LinkedList<Ejercito> getEjercitos() {
+		return ejercitos;
 	}
 
 	public Tablero getTablero() {
 		return tablero;
 	}
 
+	public boolean isLocalizarEstado() {
+		return localizarEstado;
+	}
+
+	public Medidas getMedidasTablero() {
+		return medidasTablero;
+	}
 }

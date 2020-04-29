@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public enum Especialidad {
 	
-	espada(Tipo.infanteria),lanza(Tipo.infanteria),arco(Tipo.arqueria),ballesta(Tipo.arqueria),
-	ligera(Tipo.caballeria),pesada(Tipo.caballeria);
+	Espada(Tipo.infanteria),Lanza(Tipo.infanteria),Arco(Tipo.arqueria),Ballesta(Tipo.arqueria),
+	Ligera(Tipo.caballeria),Pesada(Tipo.caballeria);
 	private Tipo tipo;
 
 	private Especialidad(Tipo tipo) {
@@ -28,6 +28,6 @@ public enum Especialidad {
 	
 	@Override
 	public String toString() {
-		return super.toString();
+		return "bien";
 	}
 }

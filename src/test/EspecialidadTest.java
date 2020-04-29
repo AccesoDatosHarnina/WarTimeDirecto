@@ -11,7 +11,7 @@ class EspecialidadTest {
 	@Test
 	void testGetTipoPorNombre() {
 		assertNull(Especialidad.getTipoPorNombre("noexiste"));
-		assertEquals(Especialidad.ballesta, Especialidad.getTipoPorNombre("ballesta"));
+		assertEquals(Especialidad.Ballesta, Especialidad.getTipoPorNombre("ballesta"));
 	}
 
 }

@@ -118,6 +118,15 @@ public class BordeArmada extends JPanel {
 		}
 
 	}
+	
+
+	public JLabel getLblCurrentBattalion() {
+		return lblCurrentBattalion;
+	}
+
+	public JLabel getLblCurrentBattalionId() {
+		return lblCurrentBattalionId;
+	}
 
 	public JButton getBtnPoblar() {
 		return btnPoblar;

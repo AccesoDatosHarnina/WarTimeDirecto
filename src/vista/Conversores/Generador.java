@@ -1,12 +1,12 @@
 package vista.Conversores;
 
-import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JPanel;
 
+import control.Juego;
 import modelo.Batallon;
 import modelo.Casilla;
 import modelo.Coordenada;
@@ -21,6 +21,7 @@ import vista.info.EjercitoInfo;
 import vista.info.EspecialidadSoldadoInfo;
 import vista.info.FichaInfo;
 import vista.info.MercadoSoldadoInfo;
+import vista.info.TableroUIInfo;
 
 public class Generador {
 
@@ -44,40 +45,23 @@ public class Generador {
 				ejercito.getInfanteria(), ejercito.getCaballeria(), ejercito.getArqueria());
 	}
 
-	private static FichaInfo getFichaInfo(Tablero tablero, Coordenada coordenada) {
+	public static FichaInfo getFichaInfo(Tablero tablero, Coordenada coordenada) {
 		Casilla casilla = tablero.getCasilla(coordenada);
 		FichaInfo fichaInfo = null;
 		if (casilla != null) {
 			Batallon batallon = (Batallon) casilla;
-			String imagen = conseguirImagen(batallon.getTipo());
+
 			// TODO cambiar cuando el batallon tenga todos los valores para la ficha
-			fichaInfo = new FichaInfo(imagen, -2, batallon.getId(), batallon.getExperienciaBatallon(),
-					batallon.getAtaqueBatallon(), batallon.getDefensaBatallon(), batallon.getStaminaBatallon(),
-					batallon.getMaximoSoldados(), false, batallon.getColorAtacante());
+			fichaInfo = new FichaInfo(batallon.getTipo().getImg(), -2, batallon.getId(),
+					batallon.getExperienciaBatallon(), batallon.getAtaqueBatallon(), batallon.getDefensaBatallon(),
+					batallon.getStaminaBatallon(), batallon.getMaximoSoldados(), false, batallon.getColorAtacante());
 
 		}
 		return fichaInfo;
 	}
 
-	private static String conseguirImagen(Tipo tipo) {
-		String imagen = "";
-		if (tipo == tipo.caballeria) {
-			imagen = "/Imagenes/cabaleria.png";
-		}
-		if (tipo == tipo.arqueria) {
-			imagen = "/Imagenes/arqueria.png";
-		}
-		if (tipo == tipo.infanteria) {
-			imagen = "/Imagenes/infanteria.png";
-		}
-		return imagen;
-	}
-
-	public static JPanel getFicha(Tablero tablero, Coordenada coordenada) {
-		FichaInfo fichaInfo = getFichaInfo(tablero, coordenada);
-		if (fichaInfo == null) {
-			return new FichaBlanca();
-		}
-		return new Ficha(fichaInfo);
+	
+	public static TableroUIInfo getTableroUIInfo(Juego juego) {
+		return new TableroUIInfo(juego.getTablero());
 	}
 }

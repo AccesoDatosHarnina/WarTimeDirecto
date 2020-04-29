@@ -27,4 +27,13 @@ public class Matriz<K, E> {
 		return reverse.get(element);
 	}
 
+	public boolean contieneElemento(E e) {
+
+		return getClave(e) != null;
+	}
+
+	public boolean contieneClave(K k) {
+		return getElement(k) != null;
+	}
+
 }

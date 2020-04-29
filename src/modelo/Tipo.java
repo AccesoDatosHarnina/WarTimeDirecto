@@ -1,9 +1,17 @@
 package modelo;
 
 public enum Tipo {
-	infanteria, caballeria, arqueria;
-	@Override
-	public String toString() {
-		return super.toString();
+	infanteria("/Imagenes/infanteria.png"), caballeria("/Imagenes/cabaleria.png"), arqueria("/Imagenes/arqueria.png");
+
+	private String img;
+
+	private Tipo(String IMG) {
+		this.img = IMG;
 	}
+
+	public String getImg() {
+		return img;
+	}
+
+	
 }

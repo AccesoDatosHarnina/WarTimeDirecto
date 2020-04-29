@@ -81,4 +81,8 @@ public class Batallon implements Casilla {
 
 	}
 
+	public void setColorAtacante(Color colorAtacante) {
+		this.colorAtacante = colorAtacante;
+	}
+
 }
