@@ -1,47 +1,24 @@
-package pruebasui;
+package control;
 
-import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import control.Controller;
-import control.Juego;
 import modelo.Coordenada;
 import modelo.Ejercito;
 import utiles.Utiles;
-import vista.BordeArmada;
 import vista.MercadoSoldadoDialog;
+import vista.UI;
 import vista.Conversores.Generador;
-import vista.info.EjercitoInfo;
 
-public class paraUIPruebaTablero extends TableroUIPrueba {
+public class ParaUI extends UI {
 
 	private Controller control;
-	private EjercitoInfo ejercitoActualInfo;
 	private boolean puedesColocar = false;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					paraUIPruebaTablero frame = new paraUIPruebaTablero();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	MouseAdapter mouseAdapter = new MouseAdapter() {
 		@Override
@@ -70,7 +47,7 @@ public class paraUIPruebaTablero extends TableroUIPrueba {
 
 	};
 
-	public paraUIPruebaTablero() {
+	public ParaUI() {
 		super();
 		Juego juego = new Juego();
 		getTableroUI().setMouseAdapter(mouseAdapter);
