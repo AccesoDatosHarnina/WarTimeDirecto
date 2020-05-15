@@ -9,12 +9,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import modelo.Coordenada;
-import older.PobladorController;
 import utiles.Utiles;
 import vista.Advertencia;
-import vista.BordeArmada;
 import vista.MercadoSoldadoDialog;
-import vista.TableroUI;
 import vista.UserInterface;
 import vista.Conversores.Generador;
 import vista.info.TableroUIInfo;
