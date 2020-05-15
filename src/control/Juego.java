@@ -9,7 +9,7 @@ import modelo.Castillo;
 import modelo.Coordenada;
 import modelo.Ejercito;
 import modelo.Tablero;
-import vista.info.FichaInfo;
+import vista.info.FichaFactory;
 import modelo.Error;
 import modelo.Soldado;
 
