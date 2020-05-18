@@ -20,6 +20,7 @@ public class Batalla {
 		return ataques.add(new Ataque(defensor, atacante));
 	}
 
+	//comentario solo valido para poder diferenciar entre cosas
 	public void guerrear() {
 		for (Iterator iterator = ataques.iterator(); iterator.hasNext();) {
 			Ataque ataque = (Ataque) iterator.next();
