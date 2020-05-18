@@ -11,6 +11,11 @@ import vista.info.EspecificacionSoldadosInfo;
 
 public class ComenzarController {
 	private Juego juego;
+	
+	public void realizarBatalla() {
+		juego.realizarBatalla();
+	}
+	
 	// Desde el mismo momento en que toco el modelo tengo que hacer pruebas
 	public void poblarBatallon(List<EspecificacionSoldadosInfo> especificacion) {
 		assert especificacion != null;

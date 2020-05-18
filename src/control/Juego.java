@@ -2,6 +2,7 @@ package control;
 
 import java.util.ArrayDeque;
 
+import modelo.Batalla;
 import modelo.Batallon;
 import modelo.Blanca;
 import modelo.Casilla;
@@ -20,6 +21,7 @@ public class Juego {
 	private boolean localizarEstado = true;
 	private Ejercito primerEjercito;
 	private Error errorActualError = null;
+	private Batalla batallaActual;
 
 	public boolean isLocalizarEstado() {
 		return localizarEstado;
@@ -105,6 +107,10 @@ public class Juego {
 			return new Blanca();
 		}
 		return casilla;
+	}
+
+	public void realizarBatalla() {
+		batallaActual.guerrear();
 	}
 	
 }
