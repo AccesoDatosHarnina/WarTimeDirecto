@@ -9,24 +9,34 @@ import modelo.Casilla;
 import modelo.Castillo;
 import modelo.Coordenada;
 import modelo.Ejercito;
-import modelo.Tablero;
-import vista.info.FichaFactory;
 import modelo.Error;
 import modelo.Soldado;
+import modelo.Tablero;
 
-public class Juego {
-	private Tablero tablero;
+public abstract class Juego {
+	protected Tablero tablero;
 	private int ancho, alto;
-	private ArrayDeque<Ejercito> ejercitos = new ArrayDeque<Ejercito>();
-	private boolean localizarEstado = true;
+	protected ArrayDeque<Ejercito> ejercitos = new ArrayDeque<Ejercito>();
+	protected boolean localizarEstado = true;
 	private Ejercito primerEjercito;
-	private Error errorActualError = null;
+	protected Error errorActualError = null;
 	private Batalla batallaActual;
 
 	public boolean isLocalizarEstado() {
 		return localizarEstado;
 	}
 
+	public Juego(Juego juego) {
+		this.tablero=juego.tablero;
+		this.alto=juego.alto;
+		this.ancho=juego.ancho;
+		this.ejercitos=juego.ejercitos;
+		this.localizarEstado=juego.localizarEstado;
+		this.primerEjercito=juego.primerEjercito;
+		this.errorActualError=juego.errorActualError;
+		this.batallaActual=juego.batallaActual;
+	}
+	
 	public Juego(int ancho, int alto) {
 		super();
 		this.ancho = ancho;
@@ -45,24 +55,10 @@ public class Juego {
 		return tablero;
 	}
 
-	public boolean localizarBatallon(Coordenada coordenada) {
-		boolean insertar = comprobarLocalizacion(coordenada);
-		if (!insertar) {
-			errorActualError = Error.posicion;
-		} else if (localizarEstado) {
-			Ejercito ejercito = ejercitos.peek();
-			Batallon batallonActual = ejercito.getBatallonActual();
-			insertar = tablero.insertar(batallonActual, coordenada);
-			if (insertar) {
-				if (!ejercito.setSiguienteBatallon()) {
-					setSiguienteEjercito();
-				}
-			} else {
-				errorActualError = Error.ocupada;
-			}
-		}
-		return insertar && localizarEstado;
-	}
+	public abstract boolean poner(Coordenada coordenada);
+//	public boolean localizarBatallon(Coordenada coordenada) {
+//		
+//	}
 
 	public Error getErrorActual() {
 		Error response = errorActualError;
@@ -70,11 +66,11 @@ public class Juego {
 		return response;
 	}
 
-	private boolean comprobarLocalizacion(Coordenada coordenada) {
+	protected boolean comprobarLocalizacion(Coordenada coordenada) {
 		return getTablero().isEnSuMitad(getEjercitoActual(), coordenada);
 	}
 
-	private void setSiguienteEjercito() {
+	protected void setSiguienteEjercito() {
 		ejercitos.offer(ejercitos.poll());
 		if (ejercitos.peek().equals(primerEjercito)) {
 			localizarEstado = false;
