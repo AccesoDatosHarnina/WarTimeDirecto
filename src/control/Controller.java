@@ -39,9 +39,16 @@ public class Controller {
 	public boolean poner(Coordenada coordenada) {
 		boolean poner = juego.poner(coordenada);
 		if(!juego.localizarEstado) {
-			juego=new JuegoMover(juego);
+			cambiarJuego();
 		}
 		return poner;
+	}
+
+	public void presentaJuego() {
+		System.out.println(juego);
+	}
+	public void cambiarJuego() {
+		juego=new JuegoMover(juego);
 	}
 
 	public String getError() {

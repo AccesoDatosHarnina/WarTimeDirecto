@@ -27,17 +27,21 @@ public class ComenzarController {
 
 	}
 	
+	public void presentaJuego() {
+		System.out.println(juego);
+	}
+	
 	public boolean isLocalizarEstado() {
 		return juego.isLocalizarEstado();
 	}
 
-	public ComenzarController(int ancho,int alto) {
-		super();
-		juego = new Juego(ancho, alto);
+	public ComenzarController(int ancho,int alto,Juego juego) {
+		super();	
+		this.juego=juego;
 	}
 
 	public boolean localizar(Coordenada coordenada) {
-		return juego.localizarBatallon(coordenada);
+		return juego.poner(coordenada);
 	}
 
 	public String getError() {

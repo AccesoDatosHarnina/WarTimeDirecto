@@ -18,7 +18,8 @@ import vista.info.TableroUIInfo;
 
 public class ParaUI extends UserInterface {
 //	private controller controller;
-//	private ConsumidorController consumidorController;
+	private ConsumidorController consumidorController;
+	private ComenzarController comenzarController;
 	private Controller controller;
 	private int ancho = 12, alto = 6;
 
@@ -42,8 +43,20 @@ public class ParaUI extends UserInterface {
 
 	public ParaUI() {
 		super();
+		// Para probar el decorador
 		controller = new Controller(ancho, alto);
-		crearTablero(controller);
+		controller.presentaJuego();
+		comenzarController = new ComenzarController(ancho, alto, controller.getJuego());
+		comenzarController.presentaJuego();
+		consumidorController = new ConsumidorController(controller.getJuego());
+		consumidorController.presentaJuego();
+		controller.cambiarJuego();
+		controller.presentaJuego();
+		comenzarController.presentaJuego();
+		// Despues de pensarlo no nos interesa el patron Decorator
+		// porque nosotros no añadimos funcionalidades al juego
+		// lo que hacemos es cambiar el comportamiento de una metodo del juego
+
 		getTableroUI().setMouseAdapter(mouseAdapter);
 		getTableroUI().actualizarTablero(getTableroUIInfo(controller.getJuego()));
 		getBordeArmada().cargarEjercito(Generador.getEjercitoInfo(controller.getEjercitoActual()));
