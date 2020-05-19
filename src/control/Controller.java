@@ -9,7 +9,7 @@ import modelo.Soldado;
 import modelo.Tablero;
 import vista.info.EspecificacionSoldadosInfo;
 
-public class ComenzarController {
+public class Controller {
 	private Juego juego;
 	// Desde el mismo momento en que toco el modelo tengo que hacer pruebas
 	public void poblarBatallon(List<EspecificacionSoldadosInfo> especificacion) {
@@ -26,7 +26,7 @@ public class ComenzarController {
 		return juego.isLocalizarEstado();
 	}
 
-	public ComenzarController(int ancho,int alto) {
+	public Controller(int ancho,int alto) {
 		super();
 		juego = new Juego(ancho, alto);
 	}

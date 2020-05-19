@@ -17,7 +17,7 @@ import vista.Conversores.Generador;
 import vista.info.TableroUIInfo;
 
 public class ParaUI extends UserInterface {
-	private ComenzarController comenzarController;
+	private Controller controller;
 	private int ancho = 12, alto = 6;
 
 	MouseAdapter mouseAdapter = new MouseAdapter() {
@@ -27,37 +27,38 @@ public class ParaUI extends UserInterface {
 			JPanel panel = (JPanel) e.getSource();
 			panel.setBackground(Color.YELLOW);
 			Coordenada coordenada = Utiles.getCoordenada(panel.getName());
-			if (!comenzarController.localizar(coordenada)) {
-				new Advertencia(comenzarController.getError());
+			if (!controller.localizar(coordenada)) {
+				new Advertencia(controller.getError());
 			}
-			getTableroUI().actualizarTablero(getTableroUIInfo(comenzarController.getJuego()));
-			if (comenzarController.isLocalizarEstado()) {
+			else {
 				getBordeArmada().getBtnPoblar().setEnabled(true);
-				getBordeArmada().update(Generador.getEjercitoInfo(comenzarController.getEjercitoActual()));
-			} else {
-				getBordeArmada().setVisible(false);
+				getBordeArmada()
+						.update(Generador.getEjercitoInfo(controller.getEjercitoActual()));
+				getBordeArmada().setVisible(controller.isLocalizarEstado());
 			}
+			getTableroUI().actualizarTablero(getTableroUIInfo(controller.getJuego()));
+			
 		}
 	};
 
 	public ParaUI() {
 		super();
-		comenzarController = new ComenzarController(ancho,alto);
-		crearTablero(comenzarController);
+		controller = new Controller(ancho,alto);
+		crearTablero(controller);
 		getTableroUI().setMouseAdapter(mouseAdapter);
-		getTableroUI().actualizarTablero(getTableroUIInfo(comenzarController.getJuego()));
-		getBordeArmada().cargarEjercito(Generador.getEjercitoInfo(comenzarController.getEjercitoActual()));
+		getTableroUI().actualizarTablero(getTableroUIInfo(controller.getJuego()));
+		getBordeArmada().cargarEjercito(Generador.getEjercitoInfo(controller.getEjercitoActual()));
 		getBtnPoblar().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MercadoSoldadoDialog mercadoSoldado = new MercadoSoldadoDialog(
-						Generador.getMercadoSoldadoInfo(comenzarController.getBatallonActual()));
+						Generador.getMercadoSoldadoInfo(controller.getBatallonActual()));
 				mercadoSoldado.setVisible(true);
 				mercadoSoldado.getBtnOk().addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if (mercadoSoldado.compruebaMax()) {
-							comenzarController.poblarBatallon(mercadoSoldado.getListaEspecificacion());
+							controller.poblarBatallon(mercadoSoldado.getListaEspecificacion());
 							getBordeArmada().getBtnPoblar().setEnabled(false);
 						}
 						mercadoSoldado.dispose();
