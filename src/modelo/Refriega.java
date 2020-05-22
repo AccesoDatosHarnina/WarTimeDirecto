@@ -5,6 +5,7 @@ public class Refriega {
 	private int incrementoExperiencia = 1, incrementoDefensa = 1, incrementoAtaque = 1;
 	private int staminaInicialDefensor,staminaInicialAtacante;
 
+	
 	public Refriega(Soldado defensor, Soldado atacante) {
 		super();
 		this.defensor = defensor;
@@ -25,10 +26,6 @@ public class Refriega {
 	}
 
 	private void finalizar() {
-		// aumentar experiencia de ambos
-		// la defensa del defensor
-		// en caso de victoria del atacante hay que
-		// aumentar el ataque del atacante
 		defensor.incrementarExperiencia(incrementoExperiencia);
 		atacante.incrementarExperiencia(incrementoExperiencia);
 		defensor.incrementarDefensa(incrementoDefensa);
@@ -37,19 +34,12 @@ public class Refriega {
 	}
 
 	private boolean isAlguienSeveramenteHerido() {
-		// TODO Auto-generated method stub
 		// Cuando tiene la mitad de la stamina que al comienzo de la refriega
-		return false;
-	}
-
-	public Soldado getVencedor() {
-		// TODO
-		return null;
+		return defensor.isSeveramenteHerido(staminaInicialDefensor)||atacante.isSeveramenteHerido(staminaInicialAtacante);
 	}
 
 	public boolean isVencedorAtacante() {
-		// TODO
-		return false;
+		return !atacante.isSeveramenteHerido(staminaInicialAtacante);
 	}
 
 	public Soldado getDefensor() {

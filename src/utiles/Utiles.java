@@ -19,20 +19,29 @@ public class Utiles {
 		return new Coordenada(Integer.valueOf(split[0]), Integer.valueOf(split[1]));
 	}
 
-	public static int getAleatorioSesgado(int min, int max, int porcentajeSesgo) {
-		assert max > min && min >= 0;
-		assert porcentajeSesgo >= 0 && porcentajeSesgo <= 100;
-		assert porcentajeSesgo % 10 == 0;
-		int experimentos=10;
-		ArrayList<Integer> lista=new ArrayList<Integer>();
-		for (int i = 0; i <experimentos; i++) {
-			lista.add((int) ((Math.random() * ((max + 1) - min)) + min));
-		}
+	private static Integer obtenerAleatorio(int min, int max) {
+		assert max>=min;
+		return  (int) ((Math.random()*((max+1)-min))+min);
+	}
+	
+	private static Integer obtenerValor(ArrayList<Integer> lista, int validos) {
 		Collections.sort(lista);
 		Collections.reverse(lista);
-		min=0;
-		max=experimentos-(porcentajeSesgo/experimentos);
-		Integer integer = lista.get((int) ((Math.random() * ((max + 1) - min)) + min));
-		return integer;
+		return lista.get(obtenerAleatorio(0, validos - 1));
+
+	}
+	
+	public static int getAleatorioSesgado(int min, int max, int porcentajeSesgo) {
+		assert porcentajeSesgo >= 0 && porcentajeSesgo <= 90;
+		assert porcentajeSesgo % 10 == 0;
+		int experimentos = 10;
+		ArrayList<Integer> lista = new ArrayList<Integer>();
+		int validos = experimentos - (porcentajeSesgo / experimentos);
+		int factorCorrecion=1;
+		validos-=factorCorrecion;
+		for (int i = 0; i < experimentos; i++) {
+			lista.add(obtenerAleatorio(min, max));
+		}
+		return obtenerValor(lista, validos);
 	}
 }

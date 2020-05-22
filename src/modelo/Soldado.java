@@ -1,5 +1,7 @@
 package modelo;
 
+import utiles.Utiles;
+
 public class Soldado {
 	
 	private Especialidad especialidad;
@@ -9,7 +11,8 @@ public class Soldado {
 	private int experiencia=1;
 	private int defensa=1;
 	private int ataque=1;
-
+	private int min=1,max=6;
+	
 	public Soldado(Especialidad especialidad) {
 		super();
 		this.especialidad = especialidad;
@@ -27,31 +30,41 @@ public class Soldado {
 	}
 	
 	public float atacar() {
-		//TODO aplicar formula de ataque
-		return -1;
+		int sinSesgo=0;
+		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sinSesgo);
+		float ataque2 = especialidad.getAtaque(ataque);
+		return aleatorioSesgado+experiencia+ataque2;
 	}
+	
 	public float defender() {
-		//TODO aqui se aplica la formula de defensa
-		return -1;
+		int sesgo=10;
+		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sesgo);
+		float defensa2 = especialidad.getDefensa(defensa);
+		return aleatorioSesgado+experiencia+defensa2;
 	}
 
 	public void incrementarExperiencia(int valor) {
-		// TODO Auto-generated method stub
+		experiencia=addValor(experiencia,valor);
+	}
+
+	private int addValor(int inicial, int valor) {
+		return inicial+=valor;
 	}
 
 	public void incrementarDefensa(int valor) {
-		// TODO Auto-generated method stub
-		
+		defensa+=valor;
 	}
 
 	public void incrementaAtaque(int valor) {
-		// TODO Auto-generated method stub
-		
+		ataque+=valor;
 	}
 	
 	public boolean isCriticaStamina() {
-		// TODO Auto-generated method stub
-		return false;
+		return stamina<=staminaCritica;
+	}
+
+	public boolean isSeveramenteHerido(int staminaInicialAtacante) {
+		return stamina<staminaInicialAtacante/2;
 	}
 
 }
