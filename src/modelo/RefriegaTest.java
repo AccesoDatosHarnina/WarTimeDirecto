@@ -25,12 +25,13 @@ class RefriegaTest {
 		int experimentos = 100;
 		int pruebas=100;
 		int ataqueVencedor =0;
+		int delta=2;
 		for (int i = 0; i < pruebas; i++) {
 			ataqueVencedor+=luchas(experimentos);
 		}
 		ataqueVencedor/=pruebas;
 		int sesgo=10;
-		assertEquals(experimentos/2-experimentos/sesgo,ataqueVencedor,10);
+		assertEquals(experimentos/2-experimentos/sesgo,ataqueVencedor,delta);
 	}
 
 	private int luchas(int experimentos) {

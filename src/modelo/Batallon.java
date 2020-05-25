@@ -19,7 +19,7 @@ public class Batallon implements Casilla {
 		this.tipo = tipo;
 	}
 
-	public Batallon(int id, Tipo tipo, LinkedList<Soldado> soldados, Color colorEjercitoAtacante) {
+	public Batallon(int id, Tipo tipo, Color colorEjercitoAtacante) {
 		this(id, tipo);
 		this.colorAtacante = colorEjercitoAtacante;
 	}
@@ -72,11 +72,15 @@ public class Batallon implements Casilla {
 //		return pop;
 //	}
 
-	public void tratarSoldado(Soldado soldado) {
+	public void tratarSoldado(Soldado soldado, boolean winner) {
 		// TODO Auto-generated method stub
 		// nivel de stamina? critico o no
 		if (!soldado.isCriticaStamina()) {
-			soldados.offer(soldado);
+			if (winner) {
+				soldados.offerFirst(soldado);
+			} else {
+				soldados.offer(soldado);
+			}
 		}
 	}
 

@@ -28,8 +28,8 @@ public class Ataque {
 			atacanteSoldado = atacante.getSoldado();
 			Refriega refriega = new Refriega(defensorSoldado, atacanteSoldado);
 			refriega.lucha();
-			defensor.tratarSoldado(defensorSoldado);
-			atacante.tratarSoldado(atacanteSoldado);
+			defensor.tratarSoldado(defensorSoldado,!refriega.isVencedorAtacante());
+			atacante.tratarSoldado(atacanteSoldado,refriega.isVencedorAtacante());
 		}
 		return response;
 	}

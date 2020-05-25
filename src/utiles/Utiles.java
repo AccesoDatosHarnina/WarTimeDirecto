@@ -33,8 +33,8 @@ public class Utiles {
 	
 	public static int getAleatorioSesgado(int min, int max, int porcentajeSesgo) {
 		assert porcentajeSesgo >= 0 && porcentajeSesgo <= 90;
-		assert porcentajeSesgo % 10 == 0;
-		int experimentos = 10;
+		assert porcentajeSesgo % 5 == 0;
+		int experimentos = 20;
 		ArrayList<Integer> lista = new ArrayList<Integer>();
 		int validos = experimentos - (porcentajeSesgo / experimentos);
 		int factorCorrecion=1;

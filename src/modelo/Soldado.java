@@ -30,15 +30,15 @@ public class Soldado {
 	}
 	
 	public float atacar() {
-		int sinSesgo=0;
-		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sinSesgo);
+		int sesgoUno=0;
+		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sesgoUno);
 		float ataque2 = especialidad.getAtaque(ataque);
 		return aleatorioSesgado+experiencia+ataque2;
 	}
 	
 	public float defender() {
-		int sesgo=10;
-		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sesgo);
+		int sesgoDos=5;
+		int aleatorioSesgado = Utiles.getAleatorioSesgado(min, max, sesgoDos);
 		float defensa2 = especialidad.getDefensa(defensa);
 		return aleatorioSesgado+experiencia+defensa2;
 	}
